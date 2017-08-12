@@ -4,12 +4,20 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section class="container" style="padding-top: 50px;">
-    <div class="col-lg-offset-3 col-md-offset-3 col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-offset-3 col-md-offset-3 panel panel-default">
-        <!--Começo Menu Login-->
-        
-        <h3 class="text-center">Empreende Rio Preto, Cadastro</h3>
-        
+<section class="container panel panel-default bordapreta">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <img src="~/img/fatecsfnd.png" style="height: 64px; width:auto; padding-top: 10px;" />
+            </div>
+            <div class="col-lg-6">
+                <h2 class="vertical-align">Empreende Rio Preto Cadastro</h2>
+            </div>
+        </div>
+    </div>
+    <div>
+        <hr class="bordapreta"/>
+    </div>
         @if (TempData["Sucesso"] != null)
         {
             <br />
@@ -31,7 +39,7 @@
 
         <form role="form" action="~/Pessoa/Create" method="POST">
                 <div class="form-group">
-                        
+                    <div class="col-lg-4">
                         <label class="">CPF: </label>
                         <!-- Textbox criado pelo razor-->
                         @Html.TextBoxFor(m => m.Cpf, new { @id = "cpf", @class = "form-control control-label", @type = "text", @placeholder = "Ex: 999.999.999-99", maxlength = "14" })
@@ -59,7 +67,18 @@
                         @Html.TextBoxFor(m => m.Email, new { @id = "email", @class = "form-control", @type = "text", @placeholder = "Email", maxlength = "60" })
                         <div class="help-block with-errors">@Html.ValidationMessageFor(m => m.Email)</div>
 
+                        <label class="control-label">Telefone Fixo: </label>
+                        <!-- Textbox criado pelo razor-->
+                        @Html.TextBoxFor(m => m.Fixo, new { @id = "fixo", @class = "form-control", @type = "text", @placeholder = "Ex: (99) 9999-9999", maxlength = "14" })
+                        <div class="help-block with-errors">@Html.ValidationMessageFor(m => m.Fixo)</div>
 
+
+                        <label class="control-label">Celular: </label>
+                        <!-- Textbox criado pelo razor-->
+                        @Html.TextBoxFor(m => m.Celular, new { @id = "celular", @class = "form-control", @type = "text", @placeholder = "Ex: (99) 99999-9999", maxlength = "15" })
+                        <div class="help-block with-errors">@Html.ValidationMessageFor(m => m.Celular)</div>
+                    </div>
+                    <div class="col-lg-4">
                         <label class="control-label">CEP: </label>
                         <!-- Textbox criado pelo razor-->
                         @Html.TextBoxFor(m => m.Cep, new { @id = "cep", @class = "form-control", @type = "text", @placeholder = "Ex: 15040270", maxlength = "9" })
@@ -95,19 +114,6 @@
                         @Html.TextBoxFor(m => m.Uf, new { @id = "uf", @class = "form-control", @type = "text", @placeholder = "Estado", maxlength = "2" })
                         <div class="help-block with-errors">@Html.ValidationMessageFor(m => m.Uf)</div>
 
-
-                        <label class="control-label">Telefone Fixo: </label>
-                        <!-- Textbox criado pelo razor-->
-                        @Html.TextBoxFor(m => m.Fixo, new { @id = "fixo", @class = "form-control", @type = "text", @placeholder = "Ex: (99) 9999-9999", maxlength = "14" })
-                        <div class="help-block with-errors">@Html.ValidationMessageFor(m => m.Fixo)</div>
-
-
-                        <label class="control-label">Celular: </label>
-                        <!-- Textbox criado pelo razor-->
-                        @Html.TextBoxFor(m => m.Celular, new { @id = "celular", @class = "form-control", @type = "text", @placeholder = "Ex: (99) 99999-9999", maxlength = "15" })
-                        <div class="help-block with-errors">@Html.ValidationMessageFor(m => m.Celular)</div>
-
-
                         <label class="control-label">Escolaridade: </label>
                         <!-- Textbox criado pelo razor-->
                         @Html.DropDownList("Escolaridade", new List<SelectListItem> {
@@ -119,6 +125,9 @@
                        new SelectListItem { Value = "Outro" , Text = "Outro" }
                     }, new { @class = "form-control", @required = "required" })
                         <div class="help-block with-errors">@Html.ValidationMessageFor(m => m.Escolaridade)</div>
+                    </div>
+                    <div class="col-lg-4">
+                        
 
 
                         <label class="control-label">Trabalha?: </label>
@@ -126,7 +135,7 @@
                         @Html.DropDownList("Trabalha", new List<SelectListItem> {
                        new SelectListItem { Value = "Sim" , Text = "Sim" },
                        new SelectListItem { Value = "Não" , Text = "Não" }
-                    }, new { @class = "form-control", @required = "required" })
+                    }, new { @id = "trabalha", @class = "form-control", @required = "required" })
                         <div class="help-block with-errors">@Html.ValidationMessageFor(m => m.Trabalha)</div>
 
 
@@ -137,7 +146,7 @@
                        new SelectListItem { Value = "Serviços" , Text = "Serviços" },
                        new SelectListItem { Value = "Indústria" , Text = "Indústria" },
                        new SelectListItem { Value = "Campo" , Text = "Campo" }
-                    }, new { @class = "form-control", @required = "required" })
+                    }, new { @id = "ondetrab", @class = "form-control", @required = "required" })
                         <div class="help-block with-errors">@Html.ValidationMessageFor(m => m.OndTrabalha)</div>
 
 
@@ -146,13 +155,13 @@
                         @Html.DropDownList("EhEmpreendedor", new List<SelectListItem> {
                        new SelectListItem { Value = "Não" , Text = "Não" },
                        new SelectListItem { Value = "Sim" , Text = "Sim" }
-                    }, new { @class = "form-control", @required = "required" })
+                    }, new { @id = "ehempreendedor", @class = "form-control", @required = "required" })
                         <div class="help-block with-errors">@Html.ValidationMessageFor(m => m.EhEmpreendedor)</div>
 
 
-                        <label class="control-label">Se é empreendedor, qual é o CNPJ: </label>
+                        <label class="control-label">Se é empreendedor, qual é o CNPJ?: </label>
                         <!-- Textbox criado pelo razor-->
-                        @Html.TextBoxFor(m => m.Cnpj, new { @id = "cnpj", @class = "form-control", @type = "text", @placeholder = "Ex: 99.999.999/9999-99", maxlength = "18" })
+                        @Html.TextBoxFor(m => m.Cnpj, new { @id = "cnpj", @class = "form-control", @type = "text", @disabled = "disabled", @placeholder = "Ex: 99.999.999/9999-99", maxlength = "18" })
                         <div class="help-block with-errors">@Html.ValidationMessageFor(m => m.Cnpj)</div>
 
 
@@ -161,13 +170,13 @@
                         @Html.DropDownList("NecessidadeEsp", new List<SelectListItem> {
                        new SelectListItem { Value = "Não" , Text = "Não" },
                        new SelectListItem { Value = "Sim" , Text = "Sim" }
-                    }, new { @class = "form-control", @required = "required" })
+                    }, new { @id = "necessidadeesp", @class = "form-control", @required = "required"})
                         <div class="help-block with-errors">@Html.ValidationMessageFor(m => m.NecessidadeEsp)</div>
 
 
                         <label class="control-label">Se sim qual?: </label>
                         <!-- Textbox criado pelo razor-->
-                        @Html.TextBoxFor(m => m.QualNecessidad, new { @id = "cnpj", @class = "form-control", @type = "text", @placeholder = "Ex: Toma remédios, Derrame, Deficiencia Fisica...", maxlength = "50" })
+                        @Html.TextBoxFor(m => m.QualNecessidad, new { @id = "qualnecessidade", @class = "form-control", @type = "text", @placeholder = "Ex: Toma remédios, Deficiencia Fisica...", maxlength = "50", @disabled = "disabled" })
                         <div class="help-block with-errors">@Html.ValidationMessageFor(m => m.QualNecessidad)</div>
 
 
@@ -187,11 +196,23 @@
                        new SelectListItem { Value = "Outro" , Text = "Outro" }
                     }, new { @class = "form-control" })
                         <div class="help-block with-errors">@Html.ValidationMessageFor(m => m.SabendoEvento)</div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <hr class="bordapreta"/>
+                        <div class="row">
 
-                        <button type="submit" class="btn btn-primary btn-lg center-block">Enviar</button>
+                            <div class="col-xs-offset-2 col-xs-4">
+                                <button type="submit" class="btn btn-primary btn-lg center-block">Enviar</button>
+                            </div>
+                            <div class="col-xs-4">
+                                <button type="clear" class="btn btn-default btn-lg center-block">Limpar</button>
+                            </div>
+                            
+                        </div>
+                        <br />
+                    </div>
                     </div>
         </form>
-    </div>
 </section>
 
 

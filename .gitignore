@@ -11,3 +11,7 @@ FatecRP.EmpreendeRP.Web/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 FatecRP.EmpreendeRP.Web/obj/Debug/FatecRP.EmpreendeRP.Web.csproj.FileListAbsolute.txt
 FatecRP.EmpreendeRP.Web/obj/Debug/FatecRP.EmpreendeRP.Web.csprojResolveAssemblyReference.cache
 FatecRP.EmpreendeRP.Web/obj/Debug/FatecRP.EmpreendeRP.Web.pdb
+*.pdb
+*.dll
+*.csproj
+*.cache
