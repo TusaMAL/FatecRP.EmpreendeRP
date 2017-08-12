@@ -15,3 +15,5 @@ FatecRP.EmpreendeRP.Web/obj/Debug/FatecRP.EmpreendeRP.Web.pdb
 *.dll
 *.csproj
 *.cache
+*.dll
+*.pdb

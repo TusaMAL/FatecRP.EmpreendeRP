@@ -41,5 +41,6 @@ namespace FatecRP.EmpreendeRP.Web.Models
         public string NecessidadeEsp { get; set; }
         public string QualNecessidad { get; set; }
         public string SabendoEvento { get; set; }
+        public string Outro { get; set; }
     }
 }

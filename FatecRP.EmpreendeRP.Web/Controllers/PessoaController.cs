@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services;
 
 namespace FatecRP.EmpreendeRP.Web.Controllers
 {
@@ -17,15 +18,28 @@ namespace FatecRP.EmpreendeRP.Web.Controllers
         [HttpPost]
         public ActionResult Create(Pessoa e)
         {
+            int valida;
             try
             {
                 using (PessoaModel model = new PessoaModel())
                 {
-                    e.EdicaoEmpreend = "2ª"; //Gambiarra próvisória pra adicionar a edição do EmpreendeRP
-                    model.Create(e);        // Chama o método Create e cadastra a Pessoa no Banco
-                    TempData["Sucesso"] = "Cadastro realizado com sucesso!"; // Mensagem utilizada para notificar o usuário do sucesso do cadastro
+                    valida = model.ValidaCPF(e.Cpf);
                 }
-                return RedirectToAction("Index", "Pessoa");
+                if (valida == 1)
+                {
+                    TempData["Falha"] = "CPF já cadastrado!";
+                    return RedirectToAction("Index", "Pessoa", e);
+                }
+                else
+                {
+                    using (PessoaModel model = new PessoaModel())
+                    {
+                        e.EdicaoEmpreend = "2ª"; //Gambiarra próvisória pra adicionar a edição do EmpreendeRP
+                        model.Create(e);        // Chama o método Create e cadastra a Pessoa no Banco
+                        TempData["Sucesso"] = "Cadastro realizado com sucesso!"; // Mensagem utilizada para notificar o usuário do sucesso do cadastro
+                    }
+                    return RedirectToAction("Index", "Pessoa");
+                }
             }
             catch (Exception ex)
             {
@@ -34,6 +48,25 @@ namespace FatecRP.EmpreendeRP.Web.Controllers
                 return RedirectToAction("Index", "Pessoa");
             }
             
+        }
+        [HttpPost]
+        public static string ConsultaCPF(string resposta)
+        {
+            int valida;
+
+            using (PessoaModel model = new PessoaModel())
+            {
+                valida = model.ValidaCPF(resposta);
+            }
+            if (valida == 0)
+            {
+                resposta = "CPF não cadastrado!";
+            }
+            else
+            {
+                resposta = "CPF já cadastrado";
+            }
+                return resposta;
         }
     }
 }

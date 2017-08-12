@@ -1,86 +1,84 @@
 // mascara dos documentos
-        $(function ($) {
-            $("#cpf").mask("999.999.999-99");
-            $("#cnpj").mask("99.999.999/9999-99");
-            $("#rg").mask("99.999.999-9");
-            $("#cep").mask("99999-999");
-            $("#fixo").mask("(99) 9999-9999");
-            $("#celular").mask("(99) 99999-9999");
+$(function ($) {
+    $("#cpf").mask("999.999.999-99");
+    $("#cnpj").mask("99.999.999/9999-99");
+    $("#rg").mask("99.999.999-9");
+    $("#cep").mask("99999-999");
+    $("#fixo").mask("(99) 9999-9999");
+    $("#celular").mask("(99) 99999-9999");
 });
 // mascara dos documentos
 
 // API do ViaCEP
-        var inputsCEP = $('#logradouro, #bairro, #localidade, #uf');
-        var validacep = /^[0-9]{8}$/;
+var inputsCEP = $('#logradouro, #bairro, #localidade, #uf');
+var validacep = /^[0-9]{8}$/;
 
-        function limpa_formulário_cep(alerta) {
-            if (alerta !== undefined) {
-                alert(alerta);
+function limpa_formulário_cep(alerta) {
+    if (alerta !== undefined) {
+        alert(alerta);
+    }
+
+    inputsCEP.val('');
+}
+
+function get(url) {
+
+    $.get(url, function (data) {
+
+        if (!("erro" in data)) {
+
+            if (Object.prototype.toString.call(data) === '[object Array]') {
+                var data = data[0];
             }
 
-            inputsCEP.val('');
-        }
-
-        function get(url) {
-
-            $.get(url, function (data) {
-
-                if (!("erro" in data)) {
-
-                    if (Object.prototype.toString.call(data) === '[object Array]') {
-                        var data = data[0];
-                    }
-
-                    $.each(data, function (nome, info) {
-                        $('#' + nome).val(nome === 'cep' ? info.replace(/\D/g, '') : info).attr('info', nome === 'cep' ? info.replace(/\D/g, '') : info);
-                    });
-
-
-
-                } else {
-                    limpa_formulário_cep("CEP não encontrado.");
-                }
-
+            $.each(data, function (nome, info) {
+                $('#' + nome).val(nome === 'cep' ? info.replace(/\D/g, '') : info).attr('info', nome === 'cep' ? info.replace(/\D/g, '') : info);
             });
+
+
+
+        } else {
+            limpa_formulário_cep("CEP não encontrado.");
         }
 
-        // Digitando CEP
-        $('#cep').on('blur', function (e) {
+    });
+}
 
-            var cep = $('#cep').val().replace(/\D/g, '');
+// Digitando CEP
+$('#cep').on('blur', function (e) {
 
-            if (cep !== "" && validacep.test(cep)) {
+    var cep = $('#cep').val().replace(/\D/g, '');
 
-                inputsCEP.val('...');
-                get('https://viacep.com.br/ws/' + cep + '/json/');
+    if (cep !== "" && validacep.test(cep)) {
 
-            } else {
-                limpa_formulário_cep(cep == "" ? undefined : "Formato de CEP inválido.");
-            }
-        });
- // API do ViaCEP
+        inputsCEP.val('...');
+        get('https://viacep.com.br/ws/' + cep + '/json/');
+
+    } else {
+        limpa_formulário_cep(cep == "" ? undefined : "Formato de CEP inválido.");
+    }
+});
+// API do ViaCEP
 
 //desabilitar campo Onde Trabalha? ao escolher não
-        $(document).ready(function () {
-            // declaração da variável
-            var valorEscolhido;
+$(document).ready(function () {
+    // declaração da variável
+    var valorEscolhido;
 
-            $("#trabalha").change(function () {
-                // obtendo o valor do atributo value da tag option
-                valorEscolhido = $("#trabalha option:selected").val();
+    $("#trabalha").change(function () {
+        // obtendo o valor do atributo value da tag option
+        valorEscolhido = $("#trabalha option:selected").val();
 
-                if (valorEscolhido == "Não")
-                {
-                    $('#ondetrab').attr('disabled', true);
-                }
-                else
-                {
-                    $('#ondetrab').attr('disabled', false);
-                }
-                // exibindo uma janela com o valor selecionado
-                
-            });
-        });
+        if (valorEscolhido == "Não") {
+            $('#ondetrab').attr('disabled', true);
+        }
+        else {
+            $('#ondetrab').attr('disabled', false);
+        }
+        // exibindo uma janela com o valor selecionado
+
+    });
+});
 //desabilitar campo Onde Trabalha? ao escolher não
 
 //Desabilitando o campo de cnpj caso o cidadão não seja empreendedor
@@ -127,3 +125,33 @@ $(document).ready(function () {
     });
 });
 //Desabilitando o campo de Necessidades especiais caso o cidadão não tenha uma
+
+//Campo Extra para digitar como conheceu o evento
+$(document).ready(function () {
+    // declaração da variável
+    var valorEscolhido;
+
+    var enableDiv = function () {
+        document.getElementById("outro").style.display = 'block';
+        document.getElementById("outropls").disabled = false;
+    }
+
+    var disableDiv = function () {
+        document.getElementById("outro").style.display = 'none';
+        document.getElementById("outropls").disabled = true;
+    }
+
+    $("#sabendoevento").change(function () {
+        // obtendo o valor do atributo value da tag option
+        valorEscolhido = $("#sabendoevento option:selected").val();
+
+        if (valorEscolhido == "Outro") {
+            enableDiv();
+        }
+        else {
+            disableDiv();
+        }
+        // exibindo uma janela com o valor selecionado
+
+    });
+});
