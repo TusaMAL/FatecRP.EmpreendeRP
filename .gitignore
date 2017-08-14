@@ -17,3 +17,14 @@ FatecRP.EmpreendeRP.Web/obj/Debug/FatecRP.EmpreendeRP.Web.pdb
 *.cache
 *.dll
 *.pdb
+*.csproj
+*.user
+*.config
+*.cache
+*.txt
+*.exe
+*.rsp
+*.targets
+*.xml
+*.PublishSettings
+*.pubxml

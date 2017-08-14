@@ -4,11 +4,11 @@ GO
 USE EmpreendeRP
 GO
 
-CREATE TABLE pessoas
+CREATE TABLE empreenderp
 (
 	nrcad			int				not null primary key identity,   
 	edicaoempreend	varchar(5)		not null,		
-	cpf				varchar(20)		unique,
+	cpf				varchar(20)		,
 	rg				varchar(20)		,
 	nome			varchar(100)	not null,
 	datanasc		date			not null,
@@ -33,7 +33,7 @@ CREATE TABLE pessoas
 )
 GO
 
-CREATE TABLE admins
+CREATE TABLE empreenderpadm
 (
 	id				int				not null primary key identity,
 	login			varchar(50),
@@ -49,13 +49,13 @@ CREATE PROCEDURE cadPessoa
 )
 AS
 BEGIN
-	INSERT INTO pessoas values (@edicaoempreend, @cpf, @rg, @nome, @datanasc, @email, @cep, @logradouro, @numero, @bairro, @cidade, @uf, @fixo, @celular, @escolaridade,
+	INSERT INTO empreenderp values (@edicaoempreend, @cpf, @rg, @nome, @datanasc, @email, @cep, @logradouro, @numero, @bairro, @cidade, @uf, @fixo, @celular, @escolaridade,
 								@trabalha, @ondtrabalha, @ehempreendedor, @cnpj, @necessidadeesp, @qualnecessidad, @sabendoevento, @outro)
 END
 GO
 
 CREATE VIEW validarCPF
 AS
-SELECT	p.cpf	CPF
-FROM	pessoas p
+SELECT	e.cpf	CPF
+FROM	empreenderp e
 

@@ -21,25 +21,25 @@ namespace FatecRP.EmpreendeRP.Web.Controllers
             int valida;
             try
             {
-                using (PessoaModel model = new PessoaModel())
-                {
-                    valida = model.ValidaCPF(e.Cpf);
-                }
-                if (valida == 1)
-                {
-                    TempData["Falha"] = "CPF já cadastrado!";
-                    return RedirectToAction("Index", "Pessoa", e);
-                }
-                else
+                if(e.Cpf != null)
                 {
                     using (PessoaModel model = new PessoaModel())
                     {
-                        e.EdicaoEmpreend = "2ª"; //Gambiarra próvisória pra adicionar a edição do EmpreendeRP
-                        model.Create(e);        // Chama o método Create e cadastra a Pessoa no Banco
-                        TempData["Sucesso"] = "Cadastro realizado com sucesso!"; // Mensagem utilizada para notificar o usuário do sucesso do cadastro
+                        valida = model.ValidaCPF(e.Cpf);
                     }
-                    return RedirectToAction("Index", "Pessoa");
+                    if (valida == 1)
+                    {
+                        TempData["Falha"] = "CPF já cadastrado!";
+                        return RedirectToAction("Index", "Pessoa", e);
+                    }
                 }
+                using (PessoaModel model = new PessoaModel())
+                {
+                    e.EdicaoEmpreend = "2ª"; //Gambiarra próvisória pra adicionar a edição do EmpreendeRP
+                    model.Create(e);        // Chama o método Create e cadastra a Pessoa no Banco
+                    TempData["Sucesso"] = "Cadastro realizado com sucesso!"; // Mensagem utilizada para notificar o usuário do sucesso do cadastro
+                }
+                return RedirectToAction("Index", "Pessoa");
             }
             catch (Exception ex)
             {

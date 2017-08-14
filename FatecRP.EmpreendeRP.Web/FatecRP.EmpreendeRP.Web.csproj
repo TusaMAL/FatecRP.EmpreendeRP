@@ -171,6 +171,8 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Properties\PublishProfiles\empreenderp - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\empreenderp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="img\fatecsfnd.png" />
     <Content Include="Scripts\bootstrap.js" />
@@ -228,7 +230,9 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>55195</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:55195/</IISUrl>
+          <IISUrl>http://localhost:55195/Pessoa/Index</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:55195/Pessoa/Index</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
