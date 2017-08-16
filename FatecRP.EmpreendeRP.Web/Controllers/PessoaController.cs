@@ -13,6 +13,10 @@ namespace FatecRP.EmpreendeRP.Web.Controllers
         // GET: Pessoa
         public ActionResult Index()
         {
+            using (PessoaModel model = new PessoaModel())
+            {
+                ViewBag.QtdCad = model.QtdCad();
+            }
             return View();
         }
         [HttpPost]
@@ -30,7 +34,7 @@ namespace FatecRP.EmpreendeRP.Web.Controllers
                     if (valida == 1)
                     {
                         TempData["Falha"] = "CPF já cadastrado!";
-                        return RedirectToAction("Index", "Pessoa", e);
+                        return RedirectToAction("Index", "Pessoa");
                     }
                 }
                 using (PessoaModel model = new PessoaModel())

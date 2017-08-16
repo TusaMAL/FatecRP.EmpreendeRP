@@ -28,3 +28,5 @@ FatecRP.EmpreendeRP.Web/obj/Debug/FatecRP.EmpreendeRP.Web.pdb
 *.xml
 *.PublishSettings
 *.pubxml
+*.pdb
+*.dll

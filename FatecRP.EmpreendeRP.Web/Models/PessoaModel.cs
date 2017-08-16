@@ -57,6 +57,16 @@ namespace FatecRP.EmpreendeRP.Web.Models
 
             cmd.ExecuteNonQuery();
         }
+        //Retorna a quantidade de usuarios cadastrados
+        public int QtdCad()
+        {
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = connection;
+            cmd.CommandText = @"SELECT COUNT(*) AS QtdCad FROM empreenderp";
+
+            int quant = (int)cmd.ExecuteScalar();
+            return quant;
+        }
         public int ValidaCPF(string cpf)
         {
             int resposta;
