@@ -27,3 +27,11 @@
 .bordapreta {
     border-color: #000000;
 }
+
+/* Smaller than standard 960 (devices and browsers) */
+@media only screen and (max-width: 960px) {
+    .fonte-titulo {
+        font-size: 1.7em;
+        padding-top: 5px;
+    }
+}
